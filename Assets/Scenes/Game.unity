@@ -588,6 +588,7 @@ MonoBehaviour:
   speed: 1
   groundspawner: {fileID: 89170769}
   speedDificulty: 0.01
+  ScoreText: {fileID: 1319983812}
 --- !u!1 &1319983810
 GameObject:
   m_ObjectHideFlags: 0

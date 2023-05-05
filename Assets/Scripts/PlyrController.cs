@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlyrController : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class PlyrController : MonoBehaviour
     public static bool IsDead=false;
     public GroundSpawner groundspawner;
     public float speedDificulty;
+    float artisMiktari = 1f;
+    float score = 0f;
+
+    [SerializeField]
+    Text ScoreText;
     private void Update()
     {
         if(IsDead)
@@ -38,6 +44,10 @@ public class PlyrController : MonoBehaviour
         Vector3 hareket = yon * speed * Time.deltaTime;
         speed += Time.deltaTime * speedDificulty;
         transform.position += hareket;
+
+        score += speed * artisMiktari * Time.deltaTime;
+        
+        ScoreText.text ="Score: "+((int) score).ToString();
     }
     private void OnCollisionExit(Collision collision)
     {
