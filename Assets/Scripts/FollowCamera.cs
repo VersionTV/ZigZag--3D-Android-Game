@@ -15,6 +15,10 @@ public class FollowCamera : MonoBehaviour
     }
     private void LateUpdate()
     {
+        if(PlyrController.IsDead)
+        {
+            return;
+        }
         transform.position = target.transform.position + distance;
     }
 }

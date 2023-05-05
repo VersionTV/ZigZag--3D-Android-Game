@@ -7,9 +7,14 @@ public class PlyrController : MonoBehaviour
     Vector3 yon=Vector3.left;
     [SerializeField]
     float speed;
+    public static bool IsDead=false;
     public GroundSpawner groundspawner;
     private void Update()
     {
+        if(IsDead)
+        {
+            return;
+        }
         if (Input.GetMouseButtonDown(0))
         {
             if (yon.x == 0)
@@ -21,6 +26,11 @@ public class PlyrController : MonoBehaviour
                 yon = Vector3.back;
             }
         }
+        if (transform.position.y < 0.1f)
+        {
+            Debug.Log("Died");
+            Destroy(this.gameObject, 3f);
+        }
     }
     private void FixedUpdate()
     {
@@ -31,13 +41,15 @@ public class PlyrController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Zemin"))
         {
-            YokEt(collision.gameObject);
+            StartCoroutine(YokEt(collision.gameObject));
             groundspawner.ZeminOlustur();
         }
     }
-    void YokEt(GameObject zemin)
+    IEnumerator YokEt(GameObject zemin)
     {
-        Destroy(zemin);
+        yield return new WaitForSeconds(0.2f);
+        zemin.AddComponent<Rigidbody>();
+        yield return new WaitForSeconds(0.5f);Destroy(zemin);
     }
 
 }//class
