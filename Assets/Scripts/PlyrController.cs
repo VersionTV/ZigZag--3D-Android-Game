@@ -5,17 +5,21 @@ using UnityEngine.UI;
 
 public class PlyrController : MonoBehaviour
 {
-    Vector3 yon=Vector3.left;
+    [Header("OutCompanent")]
+    
     [SerializeField]
     float speed;
     public static bool IsDead=false;
     public GroundSpawner groundspawner;
     public float speedDificulty;
+
     float artisMiktari = 1f;
     float score = 0f;
     int BestScore = 0;
-    
 
+    Vector3 yon = Vector3.left;
+
+    public GameObject restartGame;
     [SerializeField]
     Text ScoreText,bestScoreText;
     private void Update()
