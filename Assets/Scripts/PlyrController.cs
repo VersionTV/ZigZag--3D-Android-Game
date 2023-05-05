@@ -9,6 +9,7 @@ public class PlyrController : MonoBehaviour
     float speed;
     public static bool IsDead=false;
     public GroundSpawner groundspawner;
+    public float speedDificulty;
     private void Update()
     {
         if(IsDead)
@@ -28,13 +29,14 @@ public class PlyrController : MonoBehaviour
         }
         if (transform.position.y < 0.1f)
         {
-            Debug.Log("Died");
+            IsDead = true;
             Destroy(this.gameObject, 3f);
         }
     }
     private void FixedUpdate()
     {
         Vector3 hareket = yon * speed * Time.deltaTime;
+        speed += Time.deltaTime * speedDificulty;
         transform.position += hareket;
     }
     private void OnCollisionExit(Collision collision)
