@@ -9,7 +9,7 @@ public class PlyrController : MonoBehaviour
     
     [SerializeField]
     float speed;
-    public static bool IsDead=false;
+    public static bool IsDead=true;
     public GroundSpawner groundspawner;
     public float speedDificulty;
 
@@ -19,7 +19,7 @@ public class PlyrController : MonoBehaviour
 
     Vector3 yon = Vector3.left;
 
-    public GameObject restartGame;
+    public GameObject restartGame,playGamePanel;
     [SerializeField]
     Text ScoreText,bestScoreText;
     private void Update()
@@ -47,6 +47,7 @@ public class PlyrController : MonoBehaviour
                 BestScore =(int) score;
                 PlayerPrefs.SetInt("BestScore", BestScore);
             }
+            restartGame.SetActive(true);
             Destroy(this.gameObject, 3f);
         }
     }
@@ -77,10 +78,21 @@ public class PlyrController : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         zemin.AddComponent<Rigidbody>();
         yield return new WaitForSeconds(0.5f);Destroy(zemin);
+       
     }
     private void Start()
     {
         BestScore = PlayerPrefs.GetInt("BestScore");
         bestScoreText.text = "Best: "+ BestScore.ToString();
+        if(RestartGame.isRestart)
+        {
+            playGamePanel.SetActive(false);
+            PlyrController.IsDead = false;
+        }
+    }
+    public void PlayGame()
+    {
+        IsDead = false;
+        playGamePanel.SetActive(false);
     }
 }//class

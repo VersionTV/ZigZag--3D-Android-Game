@@ -10,6 +10,7 @@ public class RestartGame : MonoBehaviour
     public void restartGame()
     {
         isRestart = true;
+        PlyrController.IsDead = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     public void ExitGame()
