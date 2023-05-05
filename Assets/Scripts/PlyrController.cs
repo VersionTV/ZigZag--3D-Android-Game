@@ -31,8 +31,13 @@ public class PlyrController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Zemin"))
         {
+            YokEt(collision.gameObject);
             groundspawner.ZeminOlustur();
         }
+    }
+    void YokEt(GameObject zemin)
+    {
+        Destroy(zemin);
     }
 
 }//class
