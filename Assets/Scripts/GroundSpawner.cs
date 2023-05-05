@@ -7,7 +7,7 @@ public class GroundSpawner : MonoBehaviour
     [SerializeField]
     GameObject sonZemin;
     // Start is called before the first frame update
-    void ZeminOlustur()
+   public void ZeminOlustur()
     {
         Vector3 yon;
         if (Random.Range(0, 2)==0)
