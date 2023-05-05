@@ -13,9 +13,11 @@ public class PlyrController : MonoBehaviour
     public float speedDificulty;
     float artisMiktari = 1f;
     float score = 0f;
+    int BestScore = 0;
+    
 
     [SerializeField]
-    Text ScoreText;
+    Text ScoreText,bestScoreText;
     private void Update()
     {
         if(IsDead)
@@ -36,11 +38,20 @@ public class PlyrController : MonoBehaviour
         if (transform.position.y < 0.1f)
         {
             IsDead = true;
+            if (BestScore<score)
+            {
+                BestScore =(int) score;
+                PlayerPrefs.SetInt("BestScore", BestScore);
+            }
             Destroy(this.gameObject, 3f);
         }
     }
     private void FixedUpdate()
     {
+        if (IsDead)
+        {
+            return;
+        }
         Vector3 hareket = yon * speed * Time.deltaTime;
         speed += Time.deltaTime * speedDificulty;
         transform.position += hareket;
@@ -63,5 +74,9 @@ public class PlyrController : MonoBehaviour
         zemin.AddComponent<Rigidbody>();
         yield return new WaitForSeconds(0.5f);Destroy(zemin);
     }
-
+    private void Start()
+    {
+        BestScore = PlayerPrefs.GetInt("BestScore");
+        bestScoreText.text = "Best: "+ BestScore.ToString();
+    }
 }//class
