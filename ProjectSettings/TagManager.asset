@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Zemin
+  - coin
   layers:
   - Default
   - TransparentFX

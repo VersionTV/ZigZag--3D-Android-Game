@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,16 +13,21 @@ public class PlyrController : MonoBehaviour
     public static bool IsDead=true;
     public GroundSpawner groundspawner;
     public float speedDificulty;
+    public float boost;
+    
 
     float artisMiktari = 1f;
     float score = 0f;
     int BestScore = 0;
+    int coin = 0;
 
     Vector3 yon = Vector3.left;
 
     public GameObject restartGame,playGamePanel;
     [SerializeField]
-    Text ScoreText,bestScoreText;
+    Text ScoreText,bestScoreText,coinText,bestWelcome;
+    [SerializeField]
+    Animator anim;
     private void Update()
     {
         if(IsDead)
@@ -62,7 +68,7 @@ public class PlyrController : MonoBehaviour
         transform.position += hareket;
 
         score += speed * artisMiktari * Time.deltaTime;
-        
+        ScoreIslemi();
         ScoreText.text ="Score: "+((int) score).ToString();
     }
     private void OnCollisionExit(Collision collision)
@@ -71,6 +77,17 @@ public class PlyrController : MonoBehaviour
         {
             StartCoroutine(YokEt(collision.gameObject));
             groundspawner.ZeminOlustur();
+        }
+        
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("coin"))
+        {
+            coin++;
+            coinText.text="Coins :"+coin.ToString();
+            Destroy(other.gameObject);
+
         }
     }
     IEnumerator YokEt(GameObject zemin)
@@ -83,6 +100,7 @@ public class PlyrController : MonoBehaviour
     private void Start()
     {
         BestScore = PlayerPrefs.GetInt("BestScore");
+        bestWelcome.text="Best Score : "+BestScore.ToString();
         bestScoreText.text = "Best: "+ BestScore.ToString();
         if(RestartGame.isRestart)
         {
@@ -94,5 +112,14 @@ public class PlyrController : MonoBehaviour
     {
         IsDead = false;
         playGamePanel.SetActive(false);
+    }
+    void ScoreIslemi()
+    {
+        
+        if ((int)score%30==0 &&score>1)
+        {
+           
+            speedDificulty += 0.01f;
+        }
     }
 }//class
