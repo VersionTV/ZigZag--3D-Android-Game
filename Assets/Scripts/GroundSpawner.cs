@@ -27,9 +27,10 @@ public class GroundSpawner : MonoBehaviour
         {
             ZeminOlustur();
             CoinOlustur();
+
         }
     }
-    void CoinOlustur()
+     public void CoinOlustur()
     {
         if (Random.Range(0, 3) == 0)
         {
@@ -38,7 +39,7 @@ public class GroundSpawner : MonoBehaviour
         }
         IEnumerator YokEtCoin(GameObject coin)
         {
-            yield return new WaitForSeconds(50f); Destroy(coin);
+            yield return new WaitForSeconds(20f); Destroy(coin);
         }
     }
     

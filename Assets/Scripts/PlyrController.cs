@@ -80,6 +80,8 @@ public class PlyrController : MonoBehaviour
         {
             StartCoroutine(YokEt(collision.gameObject));
             groundspawner.ZeminOlustur();
+            groundspawner.CoinOlustur();
+            
         }
         
     }
@@ -130,7 +132,7 @@ public class PlyrController : MonoBehaviour
         if ((int)score%30==0 &&score>1)
         {
            
-            speedDificulty += 0.01f;
+            speedDificulty += 0.002f;
         }
     }
 }//class
