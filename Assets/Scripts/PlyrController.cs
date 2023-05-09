@@ -52,6 +52,7 @@ public class PlyrController : MonoBehaviour
             {
                 BestScore =(int) score;
                 PlayerPrefs.SetInt("BestScore", BestScore);
+
             }
             restartGame.SetActive(true);
             Destroy(this.gameObject, 3f);
@@ -115,6 +116,11 @@ public class PlyrController : MonoBehaviour
     }
     void ScoreIslemi()
     {
+        if (BestScore < score&& BestScore>0)
+        {
+            anim.SetBool("record",true);
+        }
+        
         
         if ((int)score%30==0 &&score>1)
         {
