@@ -34,6 +34,11 @@ public class GroundSpawner : MonoBehaviour
         if (Random.Range(0, 3) == 0)
         {
             coin = Instantiate(coin, sonZemin.transform.position + new Vector3(0f, 0.88f, 0f), sonZemin.transform.rotation);
+            StartCoroutine(YokEtCoin(coin));
+        }
+        IEnumerator YokEtCoin(GameObject coin)
+        {
+            yield return new WaitForSeconds(50f); Destroy(coin);
         }
     }
     

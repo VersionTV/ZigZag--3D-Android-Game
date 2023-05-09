@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.PlayerSettings;
 
 public class PlyrController : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class PlyrController : MonoBehaviour
     public GroundSpawner groundspawner;
     public float speedDificulty;
     public float boost;
+    
     
 
     float artisMiktari = 1f;
@@ -98,8 +100,11 @@ public class PlyrController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);Destroy(zemin);
        
     }
+   
+
     private void Start()
     {
+        
         BestScore = PlayerPrefs.GetInt("BestScore");
         bestWelcome.text="Best Score : "+BestScore.ToString();
         bestScoreText.text = "Best: "+ BestScore.ToString();
